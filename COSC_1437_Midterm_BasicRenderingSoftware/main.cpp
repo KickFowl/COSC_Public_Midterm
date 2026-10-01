@@ -18,14 +18,15 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     float angle = 1;
     float radius = 50;
     float conversion = 3.14 / 180;
-    coord center = { 200, 200 };
+    coord2D center = { 200, 200 };
+
+    window.setBackground(0xFF000010);
 
     while (window.isWindowOpen())
     {
         WindowManager::processMessages();
-        window.fillBackground(0xFF000010);
 
-        window.drawLine(coord{ int(cos(angle) * radius) + center.x, int(sin(angle) * radius) + center.y }, coord{ int(cos(angle) * -radius) + center.x, int(sin(angle) * -radius) + center.y }, 0xFF0000FF);
+        window.drawLine2D(coord2D{ int(cos(angle) * radius) + center.x, int(sin(angle) * radius) + center.y }, coord2D{ int(cos(angle) * -radius) + center.x, int(sin(angle) * -radius) + center.y });
 
         if (angle * conversion >= 360)
         {
@@ -33,6 +34,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         }
         else { angle+= 0.05; }
         
+        window.draw2D();
 
         window.swapBuffersToWindow();
 

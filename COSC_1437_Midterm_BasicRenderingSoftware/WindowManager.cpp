@@ -125,31 +125,27 @@ void WindowManager::swapBuffersToWindow()
 	ReleaseDC(windowHandle, deviceContext);
 }
 
-void WindowManager::fillBackground(uint32_t color)
+void WindowManager::setBackground(uint32_t color)
 {
-	int size = WIDTH * HEIGHT;
-	for (int i = 0; i < size; i++)
-	{
-		bitMap[i] = color;
-	}
+	backgroundColor = color;
 }
 
-void WindowManager::setPixelColor(coord pos, uint32_t color)
+void WindowManager::setPixelColor(coord2D pos)
 {
 	if (pos.x < 0 || pos.x >= WIDTH || pos.y < 0 || pos.y >= HEIGHT)
 	{
 		return;
 	}
 
-	bitMap[pos.y * WIDTH + pos.x] = color;
+	bitMap[int(pos.y * WIDTH + pos.x)] = pos.color.getColor_aRGB();
 }
 
-void WindowManager::drawLine(coord pos1, coord pos2, uint32_t color)
+void WindowManager::drawLine2D(coord2D pos1, coord2D pos2)
 {
-	int x1 = pos1.x;
-	int y1 = pos1.y;
-	int x2 = pos2.x;
-	int y2 = pos2.y;
+	float x1 = pos1.x;
+	float y1 = pos1.y;
+	float x2 = pos2.x;
+	float y2 = pos2.y;
 
 	// Calculate absolute differences and step directions
 	int dx = abs(x2 - x1);
@@ -163,7 +159,7 @@ void WindowManager::drawLine(coord pos1, coord pos2, uint32_t color)
 
 	// A simple while loop replaces your recursive marchingLineLoop
 	while (true) {
-		setPixelColor(coord{ x1, y1 }, color);
+		drawQueue2D.push(coord2D{ x1, y1, pos1.color.getColor_aRGB() });
 
 		// Stop when we reach the end coordinate
 		if (x1 == x2 && y1 == y2) {
@@ -182,6 +178,19 @@ void WindowManager::drawLine(coord pos1, coord pos2, uint32_t color)
 			error += dx;
 			y1 += sy;
 		}
+	}
+}
+
+void WindowManager::draw2D()
+{
+	for (int i = 0; i < WIDTH * HEIGHT; i++)
+	{
+		bitMap[i] = backgroundColor;
+	}
+	while (!drawQueue2D.empty())
+	{
+		setPixelColor(drawQueue2D.front());
+		drawQueue2D.pop();
 	}
 }
 

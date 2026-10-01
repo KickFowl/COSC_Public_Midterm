@@ -1,23 +1,46 @@
 #pragma once
 #include <windows.h>
-#include <d3d11.h>
 #include <cstdint>
 #include <cmath>
 #include <stdint.h>
+#include <queue>
+#include <cstdint>
 
-struct coord
+#include "Color.h"
+
+struct coord2D
 {
-	int x;
-	int y;
+	float x;
+	float y;
 
-	coord operator + (coord& other) const
+	COLOR color = colors::green;
+
+	coord2D operator + (coord2D& other) const
 	{
-		return coord{ x + other.x, y + other.y };
+		return coord2D{ x + other.x, y + other.y };
 	}
 
-	coord operator - (coord& other) const
+	coord2D operator - (coord2D& other) const
 	{
-		return coord{ x - other.x, y - other.y };
+		return coord2D{ x - other.x, y - other.y };
+	}
+};
+
+struct coord3D
+{
+	float x;
+	float y;
+	float z;
+
+	COLOR color = colors::green;
+
+	coord3D operator+(coord3D& other)
+	{
+		return coord3D{ x + other.x, y + other.y, z + other.z };
+	}
+	coord3D operator-(coord3D& other)
+	{
+		return coord3D{ x - other.x, y - other.y, z - other.z };
 	}
 };
 
@@ -25,6 +48,8 @@ class WindowManager
 {
 	int WIDTH;
 	int HEIGHT;
+
+	uint32_t backgroundColor;
 	
 	uint32_t* bitMap;
 	BITMAPINFO* bufferBitMap;
@@ -36,6 +61,10 @@ class WindowManager
 
 	static LRESULT CALLBACK StaticWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+	std::queue<coord2D> drawQueue2D;
+
+
 public:
 
 	WindowManager(BITMAPINFO* bitMap);
@@ -50,10 +79,12 @@ public:
 
 	inline bool isWindowOpen() const { return isRunning; };
 
-	void fillBackground(uint32_t color);
+	void setBackground(uint32_t color);
 
-	void setPixelColor(coord pos, uint32_t color);
-	void drawLine(coord pos1, coord pos2, uint32_t color);
+	void setPixelColor(coord2D pos);
+	void drawLine2D(coord2D pos1, coord2D pos2);
+
+	void draw2D();
 
 	~WindowManager();
 };

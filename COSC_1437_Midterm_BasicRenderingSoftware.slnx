@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="COSC_1437_Midterm_BasicRenderingSoftware/COSC_1437_Midterm_BasicRenderingSoftware.vcxproj" />
+  <Project Path="COSC_1437_Midterm_BasicRenderingSoftware/COSC_1437_Midterm_BasicRenderingSoftware.vcxproj" Id="c3605fd3-aaaf-4a2d-b80d-3787cedd3e9a" />
 </Solution>
