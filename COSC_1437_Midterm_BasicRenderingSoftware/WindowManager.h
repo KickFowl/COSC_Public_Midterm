@@ -5,51 +5,21 @@
 #include <stdint.h>
 #include <queue>
 #include <cstdint>
+#include <vector>
 
 #include "Color.h"
 
-struct coord2D
-{
-	float x;
-	float y;
-
-	COLOR color = colors::green;
-
-	coord2D operator + (coord2D& other) const
-	{
-		return coord2D{ x + other.x, y + other.y };
-	}
-
-	coord2D operator - (coord2D& other) const
-	{
-		return coord2D{ x - other.x, y - other.y };
-	}
-};
-
-struct coord3D
-{
-	float x;
-	float y;
-	float z;
-
-	COLOR color = colors::green;
-
-	coord3D operator+(coord3D& other)
-	{
-		return coord3D{ x + other.x, y + other.y, z + other.z };
-	}
-	coord3D operator-(coord3D& other)
-	{
-		return coord3D{ x - other.x, y - other.y, z - other.z };
-	}
-};
+using tick = uint64_t;
 
 class WindowManager
 {
 	int WIDTH;
 	int HEIGHT;
 
-	uint32_t backgroundColor;
+	tick mainTick;	
+	uint64_t lastTick;
+
+	uint64_t deltaTime;
 	
 	uint32_t* bitMap;
 	BITMAPINFO* bufferBitMap;
@@ -62,13 +32,18 @@ class WindowManager
 	static LRESULT CALLBACK StaticWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
-	std::queue<coord2D> drawQueue2D;
-
+	void updateTick();
 
 public:
-
 	WindowManager(BITMAPINFO* bitMap);
 	WindowManager(BITMAPINFO* bitMap, int width, int height);
+
+	const inline int getWidth() { return WIDTH; };
+	const inline int getHeight() { return HEIGHT; };
+	const inline tick getTick() { return mainTick; };
+
+	void inline setBitMapAt(int x, int y, uint32_t color) { bitMap[y * WIDTH + x] = color; };
+	void inline setBitMapIndex(int index, uint32_t color) { bitMap[index] = color; };
 
 	static void processMessages();
 
@@ -79,12 +54,8 @@ public:
 
 	inline bool isWindowOpen() const { return isRunning; };
 
-	void setBackground(uint32_t color);
+	tick getDeltaTime();
 
-	void setPixelColor(coord2D pos);
-	void drawLine2D(coord2D pos1, coord2D pos2);
-
-	void draw2D();
 
 	~WindowManager();
 };

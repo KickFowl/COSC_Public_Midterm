@@ -1,8 +1,7 @@
 #include "Color.h"
 
 COLOR::COLOR(uint32_t color) : alpha( color >> 24), red(color >> 16), green(color >> 8), blue(color)
-{
-}
+{}
 
 COLOR::COLOR(uint8_t alpha, uint8_t red, uint8_t green, uint8_t blue) : alpha(alpha), red(red), green(green), blue(blue)
 {}

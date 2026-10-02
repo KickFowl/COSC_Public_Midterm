@@ -32,8 +32,6 @@ LRESULT WindowManager::windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lP
 		return 0;
 
 	case WM_SIZE:
-		// Optional: Update WIDTH and HEIGHT here, then call createBackBuffer() 
-		// to dynamically resize your rendering target when the user scales the window.
 		WIDTH = LOWORD(lParam);
 		HEIGHT = HIWORD(lParam);
 
@@ -41,6 +39,13 @@ LRESULT WindowManager::windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lP
 		return 0;
 	}
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}
+
+void WindowManager::updateTick()
+{
+	mainTick++;
+	deltaTime = mainTick - lastTick;
+	lastTick = mainTick;
 }
 
 WindowManager::WindowManager(BITMAPINFO * bitMap) : WIDTH(200), HEIGHT(200), bufferBitMap(bitMap)
@@ -122,76 +127,9 @@ void WindowManager::swapBuffersToWindow()
 
 	);
 
+	updateTick();
+
 	ReleaseDC(windowHandle, deviceContext);
-}
-
-void WindowManager::setBackground(uint32_t color)
-{
-	backgroundColor = color;
-}
-
-void WindowManager::setPixelColor(coord2D pos)
-{
-	if (pos.x < 0 || pos.x >= WIDTH || pos.y < 0 || pos.y >= HEIGHT)
-	{
-		return;
-	}
-
-	bitMap[int(pos.y * WIDTH + pos.x)] = pos.color.getColor_aRGB();
-}
-
-void WindowManager::drawLine2D(coord2D pos1, coord2D pos2)
-{
-	float x1 = pos1.x;
-	float y1 = pos1.y;
-	float x2 = pos2.x;
-	float y2 = pos2.y;
-
-	// Calculate absolute differences and step directions
-	int dx = abs(x2 - x1);
-	int sx = (x1 < x2) ? 1 : -1;
-
-	int dy = -abs(y2 - y1);
-	int sy = (y1 < y2) ? 1 : -1;
-
-	// The error accumulator keeps track of when we need to step diagonally
-	int error = dx + dy;
-
-	// A simple while loop replaces your recursive marchingLineLoop
-	while (true) {
-		drawQueue2D.push(coord2D{ x1, y1, pos1.color.getColor_aRGB() });
-
-		// Stop when we reach the end coordinate
-		if (x1 == x2 && y1 == y2) {
-			break;
-		}
-
-		int e2 = 2 * error;
-
-		// Step horizontally if needed
-		if (e2 >= dy) {
-			error += dy;
-			x1 += sx;
-		}
-		// Step vertically if needed
-		if (e2 <= dx) {
-			error += dx;
-			y1 += sy;
-		}
-	}
-}
-
-void WindowManager::draw2D()
-{
-	for (int i = 0; i < WIDTH * HEIGHT; i++)
-	{
-		bitMap[i] = backgroundColor;
-	}
-	while (!drawQueue2D.empty())
-	{
-		setPixelColor(drawQueue2D.front());
-		drawQueue2D.pop();
-	}
 }
 
 WindowManager::~WindowManager()
