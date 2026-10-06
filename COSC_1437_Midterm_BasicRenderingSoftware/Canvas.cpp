@@ -1,6 +1,6 @@
 #include "Graphics.h"
 
-bool Graphics::alongLine(coord2D insert, coord2D p1, coord2D p2)
+bool Canvas::alongLine(coord2D insert, coord2D p1, coord2D p2)
 {
 	float m = p1.slope(p2);
 	float b = m * p1.x - p1.y;
@@ -12,15 +12,15 @@ bool Graphics::alongLine(coord2D insert, coord2D p1, coord2D p2)
 	return false;
 }
 
-Graphics::Graphics(WindowManager& context) : context(context)
+Canvas::Canvas(WindowManager& context) : context(context)
 {}
 
-void Graphics::setBackground(uint32_t color)
+void Canvas::setBackground(uint32_t color)
 {
 	backgroundColor = color;
 }
 
-void Graphics::setPixelColor(coord2D& pos)
+void Canvas::setPixelColor(coord2D& pos)
 {
 	if (pos.x < 0 || pos.x >= context.getWidth() || pos.y < 0 || pos.y >= context.getHeight())
 	{
@@ -30,7 +30,7 @@ void Graphics::setPixelColor(coord2D& pos)
 	context.setBitMapAt(pos.x, pos.y, pos.color.getColor_aRGB());
 }
 
-void Graphics::drawLine2D(coord2D& pos1, coord2D& pos2)
+void Canvas::drawLine2D(coord2D& pos1, coord2D& pos2)
 {
 	float x1 = pos1.x;
 	float y1 = pos1.y;
@@ -70,7 +70,7 @@ void Graphics::drawLine2D(coord2D& pos1, coord2D& pos2)
 	}
 }
 
-void Graphics::drawLine2D(coord2D& pos1, coord2D& pos2, const COLOR& color)
+void Canvas::drawLine2D(coord2D& pos1, coord2D& pos2, const COLOR& color)
 {
 	float x1 = pos1.x;
 	float y1 = pos1.y;
@@ -112,14 +112,14 @@ void Graphics::drawLine2D(coord2D& pos1, coord2D& pos2, const COLOR& color)
 	}
 }
 
-void Graphics::drawPolygon2D(polygon2D& poly)
+void Canvas::drawPolygon2D(polygon2D& poly)
 {
 	drawLine2D(poly.pos1, poly.pos2);
 	drawLine2D(poly.pos1, poly.pos3);
 	drawLine2D(poly.pos3, poly.pos2);
 }
 
-void Graphics::fanFillPolygon2D(polygon2D& poly)
+void Canvas::fanFillPolygon2D(polygon2D& poly)
 {
 	coord2D constent = poly.pos1;
 
@@ -166,7 +166,7 @@ void Graphics::fanFillPolygon2D(polygon2D& poly)
 	}
 }
 
-void Graphics::polygon2DRasterizer(polygon2D& poly, bool debug)
+void Canvas::polygon2DRasterizer(polygon2D& poly, bool debug)
 {
 
 	coord2D* orderedCoordsX[] = { &poly.pos1, &poly.pos2, &poly.pos3 };
@@ -247,7 +247,7 @@ void Graphics::polygon2DRasterizer(polygon2D& poly, bool debug)
 
 }
 
-void Graphics::drawQuad2D(quad2D& quad)
+void Canvas::drawQuad2D(quad2D& quad)
 {
 	drawLine2D(quad.pos1, quad.pos2);
 	drawLine2D(quad.pos2, quad.pos3);
@@ -255,7 +255,7 @@ void Graphics::drawQuad2D(quad2D& quad)
 	drawLine2D(quad.pos4, quad.pos1);
 }
 
-void Graphics::drawRect2D(coord2D& start, int width, int height, alignment alignTo)
+void Canvas::drawRect2D(coord2D& start, int width, int height, alignment alignTo)
 {
 	coord2D topLeft;
 
@@ -287,7 +287,7 @@ void Graphics::drawRect2D(coord2D& start, int width, int height, alignment align
 	drawLine2D(bottomLeft, topLeft);
 }
 
-void Graphics::drawRect2D(coord2D& start, int width, int height, const COLOR& color, alignment alignTo)
+void Canvas::drawRect2D(coord2D& start, int width, int height, const COLOR& color, alignment alignTo)
 {
 	coord2D topLeft;
 
@@ -322,12 +322,12 @@ void Graphics::drawRect2D(coord2D& start, int width, int height, const COLOR& co
 	drawLine2D(bottomLeft, topLeft);
 }
 
-void Graphics::fillQuad2D(quad2D& quad)
+void Canvas::fillQuad2D(quad2D& quad)
 {
 
 }
 
-void Graphics::fillRect2D(coord2D& topLeft, int width, int height)
+void Canvas::fillRect2D(coord2D& topLeft, int width, int height)
 {
 
 	for (int i = 0; i < height; i++)
@@ -340,7 +340,7 @@ void Graphics::fillRect2D(coord2D& topLeft, int width, int height)
 
 }
 
-void Graphics::draw2D()
+void Canvas::draw2D()
 {
 	for (int i = 0; i < context.getWidth() * context.getHeight(); i++)
 	{

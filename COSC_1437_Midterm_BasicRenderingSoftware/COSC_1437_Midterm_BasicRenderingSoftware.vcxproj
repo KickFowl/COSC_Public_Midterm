@@ -131,7 +131,7 @@
       <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <Manifest>
@@ -139,17 +139,27 @@
     </Manifest>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AnimationEngine.cpp" />
     <ClCompile Include="Color.cpp" />
-    <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="CoordinatePlane.cpp" />
+    <ClCompile Include="Canvas.cpp" />
+    <ClCompile Include="DrawQueue.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Rasterizer.cpp" />
+    <ClCompile Include="Signal.cpp" />
     <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AnimationEngine.h" />
     <ClInclude Include="Color.h" />
-    <ClInclude Include="Graphics.h" />
+    <ClInclude Include="CoordinatePlane.h" />
+    <ClInclude Include="Canvas.h" />
+    <ClInclude Include="dataStructs.h" />
+    <ClInclude Include="DrawQueue.h" />
+    <ClInclude Include="Rasterizer.h" />
+    <ClInclude Include="Signal.h" />
     <ClInclude Include="WindowManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
