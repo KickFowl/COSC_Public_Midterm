@@ -146,6 +146,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Rasterizer.cpp" />
     <ClCompile Include="Signal.cpp" />
+    <ClCompile Include="TwoDimensional.cpp" />
     <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -156,6 +157,7 @@
     <ClInclude Include="DrawQueue.h" />
     <ClInclude Include="Rasterizer.h" />
     <ClInclude Include="Signal.h" />
+    <ClInclude Include="TwoDimensional.h" />
     <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <ItemGroup>

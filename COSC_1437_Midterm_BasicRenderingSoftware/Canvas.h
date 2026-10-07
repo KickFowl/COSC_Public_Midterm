@@ -5,6 +5,7 @@
 
 #include "WindowManager.h"
 #include "dataStructs.h"
+#include "DrawQueue.h"
 
 enum class alignment {
 	TOPLEFT,
@@ -18,7 +19,6 @@ class Canvas
 {
 	uint32_t backgroundColor = 0xFF000000;
 
-	//std::vector<coord2D> drawQueue2D;
 
 	int width, height;
 
@@ -30,12 +30,11 @@ protected:
 
 	bool alongLine(coord2D insert, coord2D p1, coord2D p2);
 
-	quad2D polygonBound2D(polygon2D& poly);
-	quad2D nongonBound2D(nongon2D& non);
-
 	void inline setContext(WindowManager& newContext) { context = newContext; };
 public:
 	Canvas(WindowManager& context);
+
+	DrawQueue drawQueue;
 
 	const inline WindowManager& getContext() { return context; };
 	
@@ -43,14 +42,9 @@ public:
 	inline int getHeight() { return context.getHeight(); };
 
 	void setBackground(uint32_t color);
-	void setPixelColor(coord2D& pos);
-
-	void drawLine2D(coord2D& pos1, coord2D& pos2);
-	void drawLine2D(coord2D& pos1, coord2D& pos2, const COLOR& color);
+	void setPixelColor(coord2D& pos, COLOR& color = colors::green);
 
 	void drawPolygon2D(polygon2D& poly);
-	void fanFillPolygon2D(polygon2D& poly);
-	void polygon2DRasterizer(polygon2D& poly, bool debug = false);
 
 	void drawQuad2D(quad2D& quad);
 

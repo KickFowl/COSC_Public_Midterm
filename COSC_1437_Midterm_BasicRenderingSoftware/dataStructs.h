@@ -53,7 +53,7 @@ struct quad2D
 	coord2D pos1, pos2, pos3, pos4;
 };
 
-struct nongon2D
+struct ngon2D
 {
 	std::vector<coord2D> coords;
 };
