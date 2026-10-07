@@ -6,14 +6,7 @@
 #include "WindowManager.h"
 #include "dataStructs.h"
 #include "DrawQueue.h"
-
-enum class alignment {
-	TOPLEFT,
-	TOPRIGHT,
-	BOTTOMLEFT,
-	BOTTOMRIGHT,
-	CENTER
-};
+#include "Color.h"
 
 class Canvas
 {
@@ -42,18 +35,7 @@ public:
 	inline int getHeight() { return context.getHeight(); };
 
 	void setBackground(uint32_t color);
-	void setPixelColor(coord2D& pos, COLOR& color = colors::green);
-
-	void drawPolygon2D(polygon2D& poly);
-
-	void drawQuad2D(quad2D& quad);
-
-	void drawRect2D(coord2D& start, int width, int height, alignment alignTo = alignment::TOPLEFT);
-	void drawRect2D(coord2D& start, int width, int height, const COLOR& color, alignment alightTo = alignment::TOPLEFT);
-
-
-	void fillQuad2D(quad2D& quad);
-	void fillRect2D(coord2D& topLeft, int width, int height);
+	void setPixelColor(coord2D& pos, const COLOR& color = colors::green);
 
 	void draw2D();
 

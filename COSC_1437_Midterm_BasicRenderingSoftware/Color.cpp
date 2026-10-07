@@ -6,7 +6,7 @@ COLOR::COLOR(uint32_t color) : alpha( color >> 24), red(color >> 16), green(colo
 COLOR::COLOR(uint8_t alpha, uint8_t red, uint8_t green, uint8_t blue) : alpha(alpha), red(red), green(green), blue(blue)
 {}
 
-COLOR COLOR::getGradiant_aRGB(COLOR& other, float t)
+COLOR COLOR::getGradiant_aRGB(COLOR& other, float t) const
 {
 	t = std::clamp(t, 0.0f, 1.0f);
 

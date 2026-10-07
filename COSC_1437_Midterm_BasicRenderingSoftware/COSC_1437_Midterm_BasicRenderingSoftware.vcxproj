@@ -140,7 +140,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Color.cpp" />
-    <ClCompile Include="CoordinatePlane.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="DrawQueue.cpp" />
     <ClCompile Include="main.cpp" />
@@ -151,7 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Color.h" />
-    <ClInclude Include="CoordinatePlane.h" />
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="dataStructs.h" />
     <ClInclude Include="DrawQueue.h" />

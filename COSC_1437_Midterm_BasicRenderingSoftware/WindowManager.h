@@ -6,8 +6,10 @@
 #include <queue>
 #include <cstdint>
 #include <vector>
+#include <algorithm>
 
 #include "Color.h"
+#include "dataStructs.h"
 
 using tick = uint64_t;
 
@@ -44,6 +46,8 @@ public:
 
 	void inline setBitMapAt(int x, int y, uint32_t color) { bitMap[y * WIDTH + x] = color; };
 	void inline setBitMapIndex(int index, uint32_t color) { bitMap[index] = color; };
+	void setBitMapSpan(span set);
+	void fillBitMap(const COLOR& color);
 
 	static void processMessages();
 

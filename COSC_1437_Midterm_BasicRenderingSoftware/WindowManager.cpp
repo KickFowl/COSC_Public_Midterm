@@ -58,6 +58,22 @@ WindowManager::WindowManager(BITMAPINFO* bitMap, int width, int height) : WIDTH(
 
 }
 
+void WindowManager::setBitMapSpan(span set)
+{
+	int startIndex = set.start.x + set.start.y * WIDTH;
+
+	auto* destPtr = &bitMap[startIndex];
+
+	std::fill_n(destPtr, set.length, set.color.getColor_aRGB());
+}
+
+void WindowManager::fillBitMap(const COLOR& color)
+{
+	int bitMapLength = WIDTH * HEIGHT;
+
+	std::fill_n(&bitMap[0], bitMapLength, color.getColor_aRGB());
+}
+
 void WindowManager::processMessages()
 {
 	MSG msg = {};

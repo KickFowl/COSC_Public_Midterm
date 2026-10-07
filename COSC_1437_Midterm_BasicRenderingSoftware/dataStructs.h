@@ -1,5 +1,15 @@
 #pragma once
 
+#include "Color.h"
+
+enum class alignment {
+	TOPLEFT,
+	TOPRIGHT,
+	BOTTOMLEFT,
+	BOTTOMRIGHT,
+	CENTER
+};
+
 struct coord2D
 {
 	float x;
@@ -56,4 +66,11 @@ struct quad2D
 struct ngon2D
 {
 	std::vector<coord2D> coords;
+};
+
+struct span
+{
+	const COLOR& color;
+	coord2D start;
+	int length, z_index;
 };
