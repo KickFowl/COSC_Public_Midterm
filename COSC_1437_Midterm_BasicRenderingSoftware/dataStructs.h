@@ -30,7 +30,7 @@ struct coord2D
 			y - other.y
 		};
 	}
-	float slope(const coord2D& other)
+	float slope(const coord2D& other) const
 	{
 		if (x - other.x == 0) return -1.0;
 		return (y - other.y) / (x - other.x);

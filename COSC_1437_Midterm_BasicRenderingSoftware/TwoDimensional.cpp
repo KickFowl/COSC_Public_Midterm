@@ -1,6 +1,6 @@
 #include "TwoDimensional.h"
 
-void TwoDimensional::drawLine(coord2D& pos1, coord2D& pos2, const COLOR& color)
+void TwoDimensional::drawLine(const coord2D& pos1,const coord2D& pos2, const COLOR& color)
 {
 	float x1 = pos1.x;
 	float y1 = pos1.y;
@@ -45,14 +45,14 @@ void TwoDimensional::drawLine(coord2D& pos1, coord2D& pos2, const COLOR& color)
 	}
 }
 
-void TwoDimensional::drawPolygon(polygon2D& poly, const COLOR& color)
+void TwoDimensional::drawPolygon(const polygon2D& poly, const COLOR& color)
 {
 	drawLine(poly.pos1, poly.pos2, color);
 	drawLine(poly.pos1, poly.pos3, color);
 	drawLine(poly.pos3, poly.pos2, color);
 }
 
-void TwoDimensional::drawQuad(quad2D& quad, const COLOR& color)
+void TwoDimensional::drawQuad(const quad2D& quad, const COLOR& color)
 {
 	drawLine(quad.pos1, quad.pos2, color);
 	drawLine(quad.pos2, quad.pos3, color);
@@ -60,7 +60,7 @@ void TwoDimensional::drawQuad(quad2D& quad, const COLOR& color)
 	drawLine(quad.pos4, quad.pos1, color);
 }
 
-void TwoDimensional::drawRect(coord2D& start, int width, int height, const COLOR& color, alignment alignTo)
+void TwoDimensional::drawRect(const coord2D& start, int width, int height, const COLOR& color, alignment alignTo)
 {
 	coord2D topLeft;
 
@@ -92,7 +92,7 @@ void TwoDimensional::drawRect(coord2D& start, int width, int height, const COLOR
 	drawLine(bottomLeft, topLeft, color);
 }
 
-void TwoDimensional::fillRect(coord2D& topLeft, int width, int height, const COLOR& color)
+void TwoDimensional::fillRect(const coord2D& topLeft, int width, int height, const COLOR& color)
 {
 	for (int i = 0; i < height; i++)
 	{

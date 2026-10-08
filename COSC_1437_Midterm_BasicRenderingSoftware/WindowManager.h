@@ -17,6 +17,8 @@ class WindowManager
 	int WIDTH;
 	int HEIGHT;
 
+	int bufferSize = WIDTH * HEIGHT * sizeof(uint32_t);
+
 	tick mainTick;	
 	uint64_t lastTick;
 
@@ -43,9 +45,9 @@ public:
 	const inline int getHeight() { return HEIGHT; };
 	const inline tick getTick() { return mainTick; };
 
-	void inline setBitMapAt(int x, int y, uint32_t color) { bitMap[y * WIDTH + x] = color; };
-	void inline setBitMapAt(const vertex& vert) { bitMap[int(vert.position.y * WIDTH + vert.position.x)] = vert.color.getColor_aRGB(); };
-	void inline setBitMapIndex(int index, uint32_t color) { bitMap[index] = color; };
+	void inline setBitMapAt(int x, int y, uint32_t color) { if (y <= HEIGHT) { bitMap[y * WIDTH + x] = color; }; };
+	void inline setBitMapAt(const vertex& vert) { int index = int(vert.position.y * WIDTH + vert.position.x); if (index < bufferSize) bitMap[index] = vert.color.getColor_aRGB();};
+	void inline setBitMapIndex(int index, uint32_t color) { if(index <= bufferSize) bitMap[index] = color; };
 	void setBitMapSpan(span set);
 	void fillBitMap(const COLOR& color);
 
