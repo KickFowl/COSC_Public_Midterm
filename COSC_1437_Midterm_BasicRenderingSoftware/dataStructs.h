@@ -68,6 +68,13 @@ struct ngon2D
 	std::vector<coord2D> coords;
 };
 
+struct vertex
+{
+	const COLOR& color;
+	coord2D position;
+	int z_index;
+};
+
 struct span
 {
 	const COLOR& color;

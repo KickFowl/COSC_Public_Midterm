@@ -34,9 +34,16 @@ void Canvas::draw2D()
 {
 	context.fillBitMap(backgroundColor);
 	
-	for(int i = 0; i < drawQueue.getQueueLength(); i++)
+	for(auto& cmd : drawQueue.drawQueue)
 	{
-		context.setBitMapSpan(drawQueue.getQueueAt(i));
+		if (std::holds_alternative<span>(cmd))
+		{
+			context.setBitMapSpan(std::get<span>(cmd));
+		}
+		else
+		{
+			context.setBitMapAt(std::get<vertex>(cmd));
+		}
 	}
 
 	drawQueue.clearQueue();

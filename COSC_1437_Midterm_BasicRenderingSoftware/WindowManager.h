@@ -4,7 +4,6 @@
 #include <cmath>
 #include <stdint.h>
 #include <queue>
-#include <cstdint>
 #include <vector>
 #include <algorithm>
 
@@ -45,6 +44,7 @@ public:
 	const inline tick getTick() { return mainTick; };
 
 	void inline setBitMapAt(int x, int y, uint32_t color) { bitMap[y * WIDTH + x] = color; };
+	void inline setBitMapAt(const vertex& vert) { bitMap[int(vert.position.y * WIDTH + vert.position.x)] = vert.color.getColor_aRGB(); };
 	void inline setBitMapIndex(int index, uint32_t color) { bitMap[index] = color; };
 	void setBitMapSpan(span set);
 	void fillBitMap(const COLOR& color);

@@ -1,6 +1,6 @@
 #include "DrawQueue.h"
 
-void DrawQueue::pushToQueue(coord2D start, int length, const COLOR& color, int z_index)
+void DrawQueue::pushSpan(coord2D start, int length, const COLOR& color, int z_index)
 {
 
 	if (length <= 0)
@@ -13,7 +13,7 @@ void DrawQueue::pushToQueue(coord2D start, int length, const COLOR& color, int z
 	drawQueue.push_back(span{ color, start, length, z_index });
 }
 
-void DrawQueue::pushToQueue(span newSpan)
+void DrawQueue::pushSpan(span newSpan)
 {
 	if (newSpan.length <= 0)
 	{
