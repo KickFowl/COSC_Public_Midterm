@@ -35,7 +35,16 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
     {
         WindowManager::processMessages();
 
-        paint.drawLine(center, testCoord, colors::blue);
+        coord2D coord1 = { int(cos(angle) * radius) + center.x, int(sin(angle) * radius) + center.y };
+        coord2D coord2 = { int(cos(angle) * -radius) + center.x, int(sin(angle) * -radius) + center.y };
+
+        paint.drawLine(coord1, coord2);
+
+        if (angle * conversion >= 360)
+        {
+            angle = 0;
+        }
+        else { angle += 0.05; }
 
         canvas.draw2D();
 

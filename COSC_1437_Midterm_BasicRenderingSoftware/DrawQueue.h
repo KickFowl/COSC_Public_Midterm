@@ -16,7 +16,7 @@ public:
 	span getQueueAt(int index) { return drawQueue[index]; }
 
 	void clearQueue() { drawQueue.clear(); }
-	void pushToQueue(coord2D start, int length, const COLOR& color = colors::green, int z_index = 5) { drawQueue.push_back(span{ color, start, length, z_index }); }
-	void pushToQueue(span newSpan) { drawQueue.push_back(newSpan); }
+	void pushToQueue(coord2D start, int length, const COLOR& color = colors::green, int z_index = 5);
+	void pushToQueue(span newSpan);
 
 };

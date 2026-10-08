@@ -73,4 +73,11 @@ struct span
 	const COLOR& color;
 	coord2D start;
 	int length, z_index;
+
+	void operator=(span other)
+	{
+		start = other.start;
+		length = other.length;
+		z_index = other.z_index;
+	}
 };

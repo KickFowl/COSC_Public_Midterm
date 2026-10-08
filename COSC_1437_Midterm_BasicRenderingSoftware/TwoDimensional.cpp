@@ -17,34 +17,48 @@ void TwoDimensional::drawLine(coord2D& pos1, coord2D& pos2, const COLOR& color)
 	// The error accumulator keeps track of when we need to step diagonally
 	int error = dx + dy;
 
-	span newSpan{ color, coord2D{x1, y1}, 1};
+	span currentSpan{ color, coord2D{ x1, y1 }, 0 };
+
+	if (dy == 0)
+	{
+		currentSpan.length = x2 - x1;
+		canvas.drawQueue.pushToQueue(currentSpan);
+		return;
+	}
 
 	while (true) {
-		// Stop when we reach the end coordinate
-		if (x1 == x2 && y1 == y2) {
-			break;
-		}
-
 		int e2 = 2 * error;
-
-		// Step horizontally if needed
-		if (e2 >= dy) {
-			error += dy;
-			x1 += sx;
-
-			newSpan.length++;
-		}
-		// Step vertically if needed
+		
 		if (e2 <= dx) {
-			canvas.drawQueue.pushToQueue(newSpan);
-			newSpan.start.x = x1;
-
 			error += dx;
 			y1 += sy;
 		}
-	}
 
-	
+		if (currentSpan.start.y != y1)
+		{
+			currentSpan.length = x1 - currentSpan.start.x;
+			if (currentSpan.length == 0) currentSpan.length += sx;
+			canvas.drawQueue.pushToQueue(currentSpan);
+			currentSpan.start = { x1, y1 };
+		}
+		
+		if (e2 >= dy) {
+			error += dy;
+			x1 += sx;
+		}
+
+		if (x1 == x2 && y1 == y2)
+		{
+			if (currentSpan.start.y == y1)
+			{
+				currentSpan.length = x1 - currentSpan.start.x;
+				//if (currentSpan.length == 0) currentSpan.length += sx;
+				canvas.drawQueue.pushToQueue(currentSpan);
+				currentSpan.start = { x1, y1 };
+			}
+			break;
+		}
+	}
 }
 
 void TwoDimensional::drawPolygon(polygon2D& poly, const COLOR& color)
