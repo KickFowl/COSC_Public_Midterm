@@ -37,6 +37,7 @@ LRESULT WindowManager::windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lP
 
 		createBackBuffer();
 		return 0;
+		case VK_
 	}
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }
