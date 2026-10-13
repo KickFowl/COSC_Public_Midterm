@@ -10,27 +10,28 @@ enum class alignment {
 	CENTER
 };
 
-struct coord2D
+struct coord
 {
 	float x;
 	float y;
+	float z;
 
-	coord2D operator + (const coord2D& other) const { return coord2D{ x + other.x, y + other.y }; }
-	coord2D operator - (const coord2D& other) const { return coord2D{ x - other.x, y - other.y }; }
+	coord operator + (const coord& other) const { return coord{ x + other.x, y + other.y }; }
+	coord operator - (const coord& other) const { return coord{ x - other.x, y - other.y }; }
 
-	coord2D operator/(float divisor) { return coord2D{ x / divisor, y / divisor }; }
-	coord2D operator/(const coord2D& divisor) { return coord2D{ x / divisor.x, y / divisor.y }; }
+	coord operator/(float divisor) { return coord{ x / divisor, y / divisor }; }
+	coord operator/(const coord& divisor) { return coord{ x / divisor.x, y / divisor.y }; }
 
-	coord2D operator*(float factor) { return coord2D{ x * factor, y * factor }; }
-	coord2D operator*(const coord2D& factor) { return coord2D{ x * factor.x, y * factor.y }; }
+	coord operator*(float factor) { return coord{ x * factor, y * factor }; }
+	coord operator*(const coord& factor) { return coord{ x * factor.x, y * factor.y }; }
 
-	coord2D differance(coord2D& other) {
-		return coord2D{
+	coord differance(coord& other) {
+		return coord{
 			x - other.x,
 			y - other.y
 		};
 	}
-	float slope(const coord2D& other) const
+	float slope(const coord& other) const
 	{
 		if (x - other.x == 0) return -1.0;
 		return (y - other.y) / (x - other.x);
@@ -41,59 +42,24 @@ struct coord2D
 	}
 };
 
-struct coord3D
+struct polygon
 {
-	float x;
-	float y;
-	float z;
-
-	coord3D operator+(coord3D& other)
-	{
-		return coord3D{ x + other.x, y + other.y, z + other.z };
-	}
-	coord3D operator-(coord3D& other)
-	{
-		return coord3D{ x - other.x, y - other.y, z - other.z };
-	}
+	coord pos1, pos2, pos3;
 };
 
-struct polygon2D
+struct quad
 {
-	coord2D pos1, pos2, pos3;
+	coord pos1, pos2, pos3, pos4;
 };
 
-struct quad2D
+struct ngon
 {
-	coord2D pos1, pos2, pos3, pos4;
-};
-
-struct ngon2D
-{
-	std::vector<coord2D> coords;
+	std::vector<coord> coords;
 };
 
 struct vertex
 {
 	const COLOR& color;
-	coord2D position;
+	coord position;
 	int z_index;
-};
-
-struct span
-{
-	const COLOR& color;
-	coord2D start;
-	int length, z_index;
-
-	void operator=(span other)
-	{
-		start = other.start;
-		length = other.length;
-		z_index = other.z_index;
-	}
-
-	float lastBytePosition()
-	{
-		return start.lastBytePosition() + length;
-	}
 };

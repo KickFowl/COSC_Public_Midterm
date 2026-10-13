@@ -7,7 +7,7 @@
       <FileName>Graphics.h</FileName>
     </TypeIdentifier>
   </Class>
-  <Struct Name="coord2D" Collapsed="true">
+  <Struct Name="coord" Collapsed="true">
     <Position X="1.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAABgQAAAAAQ=</HashCode>
@@ -21,21 +21,21 @@
       <FileName>Graphics.h</FileName>
     </TypeIdentifier>
   </Struct>
-  <Struct Name="polygon2D" Collapsed="true">
+  <Struct Name="polygon" Collapsed="true">
     <Position X="1.25" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAM=</HashCode>
       <FileName>Graphics.h</FileName>
     </TypeIdentifier>
   </Struct>
-  <Struct Name="quad2D" Collapsed="true">
+  <Struct Name="quad" Collapsed="true">
     <Position X="3" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAM=</HashCode>
       <FileName>Graphics.h</FileName>
     </TypeIdentifier>
   </Struct>
-  <Struct Name="nongon2D" Collapsed="true">
+  <Struct Name="nongon" Collapsed="true">
     <Position X="4.75" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>

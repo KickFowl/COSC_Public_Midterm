@@ -1,6 +1,6 @@
 #include "Canvas.h"
 
-bool Canvas::alongLine(coord2D insert, coord2D p1, coord2D p2)
+bool Canvas::alongLine(coord insert, coord p1, coord p2)
 {
 	float m = p1.slope(p2);
 	float b = m * p1.x - p1.y;
@@ -20,7 +20,7 @@ void Canvas::setBackground(uint32_t color)
 	backgroundColor = color;
 }
 
-void Canvas::setPixelColor(coord2D& pos, const COLOR& color)
+void Canvas::setPixelColor(coord& pos, const COLOR& color)
 {
 	if (pos.x < 0 || pos.x >= context.getWidth() || pos.y < 0 || pos.y >= context.getHeight())
 	{
@@ -30,20 +30,13 @@ void Canvas::setPixelColor(coord2D& pos, const COLOR& color)
 	context.setBitMapAt(pos.x, pos.y, color.getColor_aRGB());
 }
 
-void Canvas::draw2D()
+void Canvas::draw()
 {
 	context.fillBitMap(backgroundColor);
 	
-	for(auto& cmd : drawQueue.drawQueue)
+	for(vertex cmd : drawQueue.drawQueue)
 	{
-		if (std::holds_alternative<span>(cmd))
-		{
-			context.setBitMapSpan(std::get<span>(cmd));
-		}
-		else
-		{
-			context.setBitMapAt(std::get<vertex>(cmd));
-		}
+			context.setBitMapAt(cmd);
 	}
 
 	drawQueue.clearQueue();

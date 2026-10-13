@@ -38,7 +38,6 @@ public:
 	void inline setBitMapAt(int x, int y, uint32_t color) { if (y <= HEIGHT) { bitMap[y * WIDTH + x] = color; }; };
 	void inline setBitMapAt(const vertex& vert) { int index = int(vert.position.y * WIDTH + vert.position.x); if (index < WIDTH * HEIGHT) bitMap[index] = vert.color.getColor_aRGB(); };
 	void inline setBitMapIndex(int index, uint32_t color) { if(index <= bufferSize) bitMap[index] = color; };
-	void setBitMapSpan(span set);
 	void fillBitMap(const COLOR& color);
 
 	static void processMessages();
