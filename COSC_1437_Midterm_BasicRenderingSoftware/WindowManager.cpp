@@ -37,16 +37,8 @@ LRESULT WindowManager::windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lP
 
 		createBackBuffer();
 		return 0;
-		case VK_
 	}
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
-}
-
-void WindowManager::updateTick()
-{
-	mainTick++;
-	deltaTime = mainTick - lastTick;
-	lastTick = mainTick;
 }
 
 WindowManager::WindowManager(BITMAPINFO * bitMap) : WIDTH(200), HEIGHT(200), bufferBitMap(bitMap)
@@ -62,6 +54,8 @@ WindowManager::WindowManager(BITMAPINFO* bitMap, int width, int height) : WIDTH(
 void WindowManager::setBitMapSpan(span set)
 {
 	int startIndex = set.start.x + set.start.y * WIDTH;
+
+	if (startIndex + set.length >= WIDTH * HEIGHT) return;
 
 	auto* destPtr = &bitMap[startIndex];
 
@@ -143,8 +137,6 @@ void WindowManager::swapBuffersToWindow()
 		DIB_RGB_COLORS, SRCCOPY
 
 	);
-
-	updateTick();
 
 	ReleaseDC(windowHandle, deviceContext);
 }

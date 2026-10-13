@@ -32,6 +32,8 @@ void Rasterizer::rasterizePolygon(const polygon2D& poly, const COLOR& color, boo
 		}
 	}
 
+	if (orderedCoordsY[0]->y > canvas.getHeight()) return;
+
 	if (orderedCoordsX[0]->x == orderedCoordsX[1]->x && orderedCoordsX[0]->y < orderedCoordsX[1]->y)
 	{
 		std::swap(orderedCoordsX[0], orderedCoordsX[1]);

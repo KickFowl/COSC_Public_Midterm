@@ -35,6 +35,10 @@ struct coord2D
 		if (x - other.x == 0) return -1.0;
 		return (y - other.y) / (x - other.x);
 	}
+	float lastBytePosition()
+	{
+		return x * y;
+	}
 };
 
 struct coord3D
@@ -86,5 +90,10 @@ struct span
 		start = other.start;
 		length = other.length;
 		z_index = other.z_index;
+	}
+
+	float lastBytePosition()
+	{
+		return start.lastBytePosition() + length;
 	}
 };

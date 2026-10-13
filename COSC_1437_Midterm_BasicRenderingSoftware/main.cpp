@@ -50,10 +50,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
         rast.rasterizePolygon(testStartPoly, colors::burgundy, true);
 
-        testStartPoly.pos1 = testStartPoly.pos1 + coord2D{ 5, 6 };
-        testStartPoly.pos2 = testStartPoly.pos2 + coord2D{ 1, 10 };
-        testStartPoly.pos3 = testStartPoly.pos3 + coord2D{ -5, 3 };
-
         canvas.draw2D();
 
         window.swapBuffersToWindow();
