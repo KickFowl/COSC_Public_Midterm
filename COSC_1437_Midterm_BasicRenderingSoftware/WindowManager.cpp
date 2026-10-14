@@ -37,6 +37,18 @@ LRESULT WindowManager::windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lP
 
 		createBackBuffer();
 		return 0;
+	case WM_KEYDOWN:
+	case WM_SYSKEYDOWN:
+		if (inputHandler) inputHandler->HandleKeyDown(uMsg, wParam, lParam);
+		return 0;
+
+	case WM_MOUSEMOVE:
+	case WM_LBUTTONDOWN:
+	case WM_LBUTTONUP:
+	case WM_RBUTTONDOWN:
+	case WM_RBUTTONUP:
+		if (inputHandler) inputHandler->HandleMouseMove(uMsg, wParam, lParam);
+		return 0;
 	}
 	return DefWindowProc(hwnd, uMsg, wParam, lParam);
 }

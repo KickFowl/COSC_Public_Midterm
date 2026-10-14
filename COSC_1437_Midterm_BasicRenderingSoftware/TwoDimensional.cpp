@@ -86,6 +86,15 @@ void TwoDimensional::drawRect(const coord& start, int width, int height, const C
 	drawLine(bottomLeft, topLeft, color);
 }
 
+void TwoDimensional::fillQuad(const quad& quad, const COLOR& color)
+{
+	for (int i = 0; i < abs(quad.pos1.y - quad.pos4.y); i++)
+	{
+		for (int j = 0; j < abs(quad.pos1.y - quad.pos2.y); j++)
+			canvas.drawQueue.pushVert(coord{ quad.pos1.x + j, quad.pos1.y + i }, color);
+	}
+}
+
 void TwoDimensional::fillRect(const coord& topLeft, int width, int height, const COLOR& color)
 {
 	for (int i = 0; i < height; i++)

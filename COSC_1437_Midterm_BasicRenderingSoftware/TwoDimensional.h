@@ -1,4 +1,5 @@
 #pragma once
+#include <cmath>
 
 #include "Canvas.h"
 #include "dataStructs.h"
@@ -24,7 +25,7 @@ public:
 	void drawRect(const coord& start, int width, int height, const COLOR& color, alignment alightTo = alignment::TOPLEFT);
 
 
-	void fillQuad(const quad& quad);
+	void fillQuad(const quad& quad, const COLOR& color);
 	void fillRect(const coord& topLeft, int width, int height, const COLOR& color);
 
 };

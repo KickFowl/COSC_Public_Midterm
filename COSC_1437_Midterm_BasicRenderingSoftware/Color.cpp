@@ -24,3 +24,11 @@ COLOR COLOR::getGradiant_aRGB(COLOR& other, float t) const
 
 	return newColor;
 }
+
+void COLOR::operator=(const COLOR& other)
+{
+	alpha = other.alpha;
+	red = other.red;
+	green = other.green;
+	blue = other.blue;
+}

@@ -9,6 +9,7 @@
 
 #include "Color.h"
 #include "dataStructs.h"
+#include "InputHandle.h"
 
 class WindowManager
 {
@@ -28,12 +29,16 @@ class WindowManager
 	static LRESULT CALLBACK StaticWindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 	LRESULT windowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
 
+	InputHandle* inputHandler = nullptr;
+
 public:
 	WindowManager(BITMAPINFO* bitMap);
 	WindowManager(BITMAPINFO* bitMap, int width, int height);
 
 	const inline int getWidth() { return WIDTH; };
 	const inline int getHeight() { return HEIGHT; };
+
+	inline void setInputHandler(InputHandle* h) { inputHandler = h; }
 
 	void inline setBitMapAt(int x, int y, uint32_t color) { if (y <= HEIGHT) { bitMap[y * WIDTH + x] = color; }; };
 	void inline setBitMapAt(const vertex& vert) { int index = int(vert.position.y * WIDTH + vert.position.x); if (index < WIDTH * HEIGHT) bitMap[index] = vert.color.getColor_aRGB(); };

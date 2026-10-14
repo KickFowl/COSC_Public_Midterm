@@ -25,6 +25,8 @@ struct coord
 	coord operator*(float factor) { return coord{ x * factor, y * factor }; }
 	coord operator*(const coord& factor) { return coord{ x * factor.x, y * factor.y }; }
 
+	bool operator==(const coord& other) const { if (x == other.x && y == other.y && z == other.z) { return true; } else{ return false; } }
+
 	coord differance(coord& other) {
 		return coord{
 			x - other.x,
@@ -62,4 +64,20 @@ struct vertex
 	const COLOR& color;
 	coord position;
 	int z_index;
+};
+
+struct rastPolyDebug
+{
+	coord a, top, bottom;
+	quad boundingBox;
+	COLOR colorCode = colors::cyan;
+
+	void operator=(rastPolyDebug other)
+	{
+		a = other.a;
+		top = other.top;
+		bottom = other.bottom;
+		boundingBox = other.boundingBox;
+		colorCode = other.colorCode;
+	}
 };

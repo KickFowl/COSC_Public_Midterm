@@ -142,6 +142,7 @@
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Canvas.cpp" />
     <ClCompile Include="DrawQueue.cpp" />
+    <ClCompile Include="InputHandle.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Rasterizer.cpp" />
     <ClCompile Include="Signal.cpp" />
@@ -153,13 +154,11 @@
     <ClInclude Include="Canvas.h" />
     <ClInclude Include="dataStructs.h" />
     <ClInclude Include="DrawQueue.h" />
+    <ClInclude Include="InputHandle.h" />
     <ClInclude Include="Rasterizer.h" />
     <ClInclude Include="Signal.h" />
     <ClInclude Include="TwoDimensional.h" />
     <ClInclude Include="WindowManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

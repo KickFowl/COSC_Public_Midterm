@@ -22,6 +22,7 @@ public:
 	inline uint32_t getColor_aRGB() const { return (static_cast<uint32_t>(alpha) << 24 | static_cast<uint32_t>(red) << 16 | static_cast<uint32_t>(green) << 8 | static_cast<uint32_t>(blue)); };
 
 	COLOR getGradiant_aRGB(COLOR& other, float t) const;
+	void operator=(const COLOR& other);
 
 };
 

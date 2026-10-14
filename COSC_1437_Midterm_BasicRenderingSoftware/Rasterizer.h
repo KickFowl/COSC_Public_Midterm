@@ -12,7 +12,8 @@ public:
 
 	Rasterizer(Canvas& canvas) : TwoDimensional(canvas) {}
 
-	void rasterizePolygon(const polygon& poly, const COLOR& color = colors::burgundy, bool debug = false);
+	void rasterizePolygon(const polygon& poly, const COLOR& color = colors::burgundy);
+	rastPolyDebug rasterizeDebugPolygon(const polygon& poly, const COLOR& color = colors::burgundy);
 
 };
 
