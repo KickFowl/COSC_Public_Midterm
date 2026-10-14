@@ -82,25 +82,30 @@ void WindowManager::processMessages()
 
 bool WindowManager::createWindow(HINSTANCE hInstance, const wchar_t* title)
 {
+	//A win32 class not user defined
 	WNDCLASS wc = {};
-	wc.lpfnWndProc = StaticWindowProc; // Attach the static router
+	wc.lpfnWndProc = StaticWindowProc;
 	wc.hInstance = hInstance;
 	wc.lpszClassName = L"MyWindowClass";
 
+	//Registers the class with the system
 	RegisterClass(&wc);
 
+	//Defines the window Handle (basically the device wich will move information through the berrier)
 	windowHandle = CreateWindowEx(
 		0, L"MyWindowClass", title,
 		WS_OVERLAPPEDWINDOW | WS_VISIBLE,
 		CW_USEDEFAULT, CW_USEDEFAULT, WIDTH, HEIGHT,
 		NULL, NULL, hInstance,
-		this // CRITICAL: Pass the instance pointer into the window creation
+		this // <- Stores the pointer to the class in the window instance
 	);
 
+	//Checks to make sure the handle was created
 	if (!windowHandle) return false;
 
+	//Class specific logic
 	isRunning = true;
-	createBackBuffer(); // Automatically size the backbuffer
+	createBackBuffer();
 	return true;
 }
 
